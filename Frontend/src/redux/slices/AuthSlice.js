@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-
+ 
 
 const AuthSlice = createSlice({
     name:"auth",
@@ -8,9 +8,14 @@ const AuthSlice = createSlice({
         isLoggedin: false
     },
     reducers:{
- 
+        login:(state) => {
+            state.isLoggedin = true;
+        },
+        logout: (state) => {
+            state.isLoggedin = false;
+        }
     }
 })
 
-export const {setLoggedIn} = AuthSlice.actions;
+export const {login,logout} = AuthSlice.actions;
 export  default AuthSlice.reducer;

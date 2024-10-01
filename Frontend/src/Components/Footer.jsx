@@ -1,24 +1,30 @@
-import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import React from "react";
+import { Link, NavLink } from "react-router-dom";
 
 function Footer() {
   return (
-    <footer className= "border-y bg-gray-200">
+    <footer className="border-y bg-gray-200">
       <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
         <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0">
             <Link to="/" className="flex items-center">
-              <h1 className='text-4xl font-extrabold text-indigo-500'>TodoApp</h1>
+              <h1 className="text-4xl font-extrabold text-indigo-500">
+                TodoApp
+              </h1>
             </Link>
           </div>
           <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
             <div>
-              <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase">Resources</h2>
+              <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase">
+                Resources
+              </h2>
               <ul className="text-gray-500 font-medium">
                 <li className="mb-4">
                   <NavLink
                     to="/"
-                    className={({ isActive }) => (isActive ? 'text-indigo-600' : 'text-gray-500')}
+                    className={({ isActive }) =>
+                      isActive ? "text-indigo-600" : "text-gray-500"
+                    }
                   >
                     Home
                   </NavLink>
@@ -26,7 +32,9 @@ function Footer() {
                 <li>
                   <NavLink
                     to="/about"
-                    className={({ isActive }) => (isActive ? 'text-indigo-600' : 'text-gray-500')}
+                    className={({ isActive }) =>
+                      isActive ? "text-indigo-600" : "text-gray-500"
+                    }
                   >
                     About
                   </NavLink>
@@ -34,10 +42,15 @@ function Footer() {
               </ul>
             </div>
             <div>
-              <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase">Follow us</h2>
+              <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase">
+                Follow us
+              </h2>
               <ul className="text-gray-500 font-medium">
                 <li className="mb-4">
-                  <a href="https://github.com/Sandeep-Ptdr" className="hover:underline">
+                  <a
+                    href="https://github.com/Sandeep-Ptdr"
+                    className="hover:underline"
+                  >
                     GitHub
                   </a>
                 </li>
@@ -49,7 +62,9 @@ function Footer() {
               </ul>
             </div>
             <div>
-              <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase">Legal</h2>
+              <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase">
+                Legal
+              </h2>
               <ul className="text-gray-500 font-medium">
                 <li className="mb-4">
                   <Link to="/privacy-policy" className="hover:underline">
@@ -68,9 +83,9 @@ function Footer() {
         <hr className="my-6 border-gray-200 sm:mx-auto lg:my-8" />
         <div className="sm:flex sm:items-center sm:justify-between">
           <span className="text-sm text-gray-500 sm:text-center">
-            © 2023{' '}
+            © 2023{" "}
             <a href="#" className="hover:underline">
-                Developer
+              Developer
             </a>
             . All Rights Reserved.
           </span>

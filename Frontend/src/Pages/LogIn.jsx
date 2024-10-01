@@ -1,38 +1,40 @@
 import axios from "axios";
 import React, { useState } from "react";
-import {useSelector} from 'react-redux'
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-
+import { login } from "../redux/slices/AuthSlice";
 import { useNavigate } from "react-router-dom";
 
 function LogIn() {
-  // const navigate =  useNavigate()
-const  isLoggedIn = useSelector((state) => state.auth.isLoggedin);
-console.log(isLoggedIn,'isloggedinnnn')
+  const navigate = useNavigate();
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedin);
+  const dispatch = useDispatch();
+  console.log(isLoggedIn, "isloggedinnnn");
   const [input, setInput] = useState({
     email: "",
     password: "",
   });
 
-   
-
   const handleLogin = async (e) => {
     e.preventDefault();
 
-     await axios.post('http://localhost:3000/api/v1/login',input)
-     .then((res) => console.log(res.data.others._id))
+    await axios
+      .post("http://localhost:3000/api/v1/login", input)
+      .then((res) => {
+        sessionStorage.setItem("id", res.data.others._id);
+        dispatch(login());
+        navigate('/')
+      });
 
-     setInput({
-        email:"",
-        password:""
-     })
+    setInput({
+      email: "",
+      password: "",
+    });
     //  console.log(input,"login Input")
   };
 
   return (
     <>
-     
-
       <div className="main-container  bg-white  justify-center   items-center  flex h-[60vh] sm:h-screen w-full  rounded-lg ">
         <div className="flex flex-col self-center bg-white justify-center items-center h-[70%] w-full sm:w-1/3 sm:h-1/2 rounded-lg shadow-lg">
           <form

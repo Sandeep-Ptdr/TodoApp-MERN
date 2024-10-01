@@ -6,12 +6,12 @@ const router = Router();
 
 router.post("/addtask", async (req, res) => {
     try {
-        const { title, body, email } = req.body;
+        const { title, body, id } = req.body;
 
-        const existingUser = await User.findOne({ email });
+        const existingUser = await User.findById(id);
 
         if (!existingUser) {
-            return res.status(404).json({ message: "User not found !" });
+            return res.status(200).json({ message: "User not found !" });
         }
 
         const todo = new Todo({ title, body, user: existingUser });
@@ -23,6 +23,7 @@ router.post("/addtask", async (req, res) => {
         await existingUser.save();
 
         return res.status(200).json({ todo });
+
     } catch (error) {
         console.log("Error to add task", error);
         return res.status(500).json({ message: "Server error while adding task" });
@@ -33,13 +34,8 @@ router.post("/addtask", async (req, res) => {
 
 router.put("/updatetask/:id", async (req, res) => {
     try {
-        const { title, body, email } = req.body;
-        const existingUser = await User.findOne({ email });
-
-        if (!existingUser) {
-            return res.status(404).json({ message: "User not found !" });
-        }
-
+        const { title, body,id } = req.body;
+        
         const upTodo = await Todo.findByIdAndUpdate(
             req.params.id,
             { title, body },
@@ -63,10 +59,10 @@ router.put("/updatetask/:id", async (req, res) => {
 
 router.delete("/deletetask/:id", async (req, res) => {
     try {
-        const { email } = req.body;
-
-        const existingUser = await User.findOneAndUpdate(
-            { email },
+         const {id} = req.body;
+         
+        const existingUser = await User.findByIdAndUpdate(
+            id,
             { $pull: { todo: req.params.id } }
         ); //$pull is a opeartor function for mongodb that pull out the data from array collection.
 
@@ -91,14 +87,14 @@ router.get("/readtask/:id", async (req, res) => {
         const existingUser = await Todo.find({ user: req.params.id });
 
         if (!existingUser) {
-            res.status(404).json({ message: "User Id not found!" });
+            res.status(200).json({ message: "User Id not found!" });
         }
 
         const alltodo = await Todo.find({ user: req.params.id }).sort({
             createdAt: -1,
         });
 
-        if(alltodo.length !==0){
+        if(alltodo.length !== 0){
             return  res.status(200).json({ alltodo });
         }
         else{

@@ -1,10 +1,12 @@
 import React from "react";
 import { RiTodoFill } from "react-icons/ri";
 import { NavLink } from "react-router-dom";
-import {useSelector} from 'react-redux'
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../redux/slices/AuthSlice";
 const Header = () => {
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedin);
 
-  const  isLoggedIn = useSelector((state) => state.auth.isLoggedin);
   return (
     <>
       <nav className="bg-gray-200 shadow shadow-gray-300 w-100 h-1/5 px-8 md:px-auto">
@@ -37,30 +39,39 @@ const Header = () => {
               </li>
             </ul>
           </div>
-         {isLoggedIn ? ( <div className="order-2 md:order-3 flex gap-2">
-            <div>
-              <NavLink to="/">
-                <button className="px-4 py-2  bg-indigo-500 hover:bg-indigo-600 text-gray-50 rounded-xl flex items-center gap-2">
-                  <span>Logout</span>
-                </button>
-              </NavLink>
+          {isLoggedIn ? (
+            <div className="order-2 md:order-3 flex gap-2">
+              <div>
+                <NavLink to="/">
+                  <button
+                  onClick={() => {
+                    dispatch(logout());
+                    sessionStorage.removeItem("id");
+                  }}
+                  className="px-4 py-2  bg-indigo-500 hover:bg-indigo-600 text-gray-50 rounded-xl flex items-center gap-2">
+                    <span>Logout</span>
+                  </button>
+                </NavLink>
+              </div>
             </div>
-          </div>):( <div className="order-2 md:order-3 flex gap-2">
-            <div>
-              <NavLink to="/login">
-                <button className="px-4 py-2  bg-indigo-500 hover:bg-indigo-600 text-gray-50 rounded-xl flex items-center gap-2">
-                  <span>SignIn</span>
-                </button>
-              </NavLink>
+          ) : (
+            <div className="order-2 md:order-3 flex gap-2">
+              <div>
+                <NavLink to="/login">
+                  <button className="px-4 py-2  bg-indigo-500 hover:bg-indigo-600 text-gray-50 rounded-xl flex items-center gap-2">
+                    <span>SignIn</span>
+                  </button>
+                </NavLink>
+              </div>
+              <div>
+                <NavLink to="/register">
+                  <button className="px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-gray-50 rounded-xl flex items-center gap-2">
+                    <span>SignUp</span>
+                  </button>
+                </NavLink>
+              </div>
             </div>
-            <div>
-              <NavLink to="/register">
-                <button className="px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-gray-50 rounded-xl flex items-center gap-2">
-                  <span>SignUp</span>
-                </button>
-              </NavLink>
-            </div>
-          </div>) }
+          )}
         </div>
       </nav>
     </>

@@ -40,12 +40,10 @@ router.post('/login', async (req, res) => {
             res.status(200).json({ message: "Incorrect Email!" });
         }
         const isPasswordCorrect = bcrypt.compareSync(req.body.password, user.password);
-        // console.log('user password', user.password)
-        // console.log('req pass', req.body.password)
-        // console.log('ispassword',isPasswordCorrect);
+        
 
         if (!isPasswordCorrect) {
-            res.status(200).json({ message: "Incorrect  Password!" });
+            res.status(200).json({ message: "Incorrect Password!" });
 
         }
 

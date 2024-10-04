@@ -47,7 +47,7 @@ function UpdateTodo({ toggleUpdateCard, updateArray }) {
           <input
             onChange={handleChange}
             name="title"
-            value={Input.title}
+            value={Input.title || ""}
             className="px-3 py-1 outline-none border-b-[1px] border-gray-500"
             type="text"
             placeholder="Title"
@@ -55,7 +55,7 @@ function UpdateTodo({ toggleUpdateCard, updateArray }) {
           <input
             onChange={handleChange}
             name="body"
-            value={Input.body}
+            value={Input.body || ""}
             className="px-3 py-1 outline-none border-b-[1px] border-gray-500"
             type="text"
             placeholder="Description"

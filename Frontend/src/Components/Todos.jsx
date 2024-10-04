@@ -48,11 +48,11 @@ function Todos() {
 
       Todos.splice(id, "1");
       setTodos([...Todos]);
-      toast.error("Task Deleted !");
+      toast("Task Deleted !");
     } else {
       Todos.splice(id, "1");
       setTodos([...Todos]);
-      toast.error("Task Deleted !");
+      toast("Task Deleted !");
     }
   };
 
@@ -92,29 +92,31 @@ function Todos() {
         >
           <input
             name="title"
-            className="px-3 py-1 outline-none border-b-[1px] border-gray-500"
+            className="px-3 py-1 outline-none border-b-[1.5px] border-gray-500   focus:border-indigo-500 bg-transparent"
             type="text"
+            required
             placeholder="Title"
             value={Input.title}
             onChange={handleInput}
           />
           <input
             name="body"
-            className="px-3 py-1 outline-none border-b-[1px] border-gray-500"
+            required
+            className="px-3 py-1 outline-none border-b-[1.5px] border-gray-500 focus:border-indigo-500 bg-transparent"
             type="text"
             placeholder="Description"
             value={Input.body}
             onChange={handleInput}
           />
           <button
-            className=" mt-2 bg-indigo-500 hover:bg-indigo-600 self-center w-1/2 py-1 text-lg font-medium rounded-lg text-white"
+            className=" mt-2 bg-indigo-500 hover:bg-indigo-600 self-center w-1/2 py-1 text-lg font-medium rounded-lg text-white transition duration-300 ease-in-out"
             type="submit"
           >
             Add
           </button>
         </form>
       </div>
-      <div className="w-full min-h-full flex flex-col items-center sm:grid grid-cols-5 gap-3  mt-5">
+      <div className="w-full min-h-full flex flex-col items-center sm:grid sm:grid-cols-4 gap-3  mt-5">
         {Todos && Todos.length > 0 ? (
           Todos.map((Todos, index) => (
             <TodoCard
@@ -129,7 +131,7 @@ function Todos() {
             />
           ))
         ) : (
-          <h1 className="absolute top-[50%] left-[50%] -translate-y-[50%] -translate-x-[50%] sm:text-[70px] text-[30px] font-bold text-zinc-500 -z-10 animate-pulse">
+          <h1 className="absolute top-[50%] left-[50%] -translate-y-[50%] -translate-x-[50%] sm:text-[70px] text-[30px] font-bold text-zinc-500  animate-pulse">
             No Todos..
           </h1>
         )}

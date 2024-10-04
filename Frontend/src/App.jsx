@@ -19,7 +19,7 @@ if(id){
   return (
     <div>
       <Header />
-      <main className="min-h-[100vh]">
+      <main className="min-h-[100vh] bg-gray-100">
         <Outlet />
       </main>
       <Footer />

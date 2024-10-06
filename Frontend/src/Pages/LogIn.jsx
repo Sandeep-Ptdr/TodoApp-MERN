@@ -20,7 +20,7 @@ function LogIn() {
     e.preventDefault();
 
     await axios
-      .post("http://localhost:3000/api/v1/login", input)
+      .post(`http://localhost:3000/api/v1/login`, input)
       .then((res) => {
         if (
           res.data.message === "Incorrect Email!" ||

@@ -15,10 +15,11 @@ function Todos() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true);
       if (userId) {
-        setLoading(true);
+        
         await axios
-          .post("http://localhost:3000/api/v2/addtask", {
+          .post(`http://localhost:3000/api/v2/addtask`, {
             title: Input.title,
             body: Input.body,
             id: userId,
@@ -79,21 +80,22 @@ function Todos() {
   };
 
   // Monitor changes in Todos and log them when they update
-   userId && (useEffect(() => {
+    useEffect(() => {
     const fetchTodos = async () => {
       try {
-        setLoading(true)
+        
         await axios
         .get(`http://localhost:3000/api/v2/readtask/${userId}`)
         .then((res) => setTodos(res.data.alltodo));
       } catch (error) {
-        console.log(error)
-      } finally{
-        setLoading(false)
-      }
+        console.log('error in reading data.',error)
+      }  
     };
-    fetchTodos();
-  }, [Todos, handleSubmit]));
+     if (userId) {
+      fetchTodos()
+      
+     };
+  }, [userId,handleSubmit]);
 
   return (
     <>

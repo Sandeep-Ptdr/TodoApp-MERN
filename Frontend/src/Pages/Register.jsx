@@ -15,7 +15,7 @@ function Register() {
     e.preventDefault();
 
     await axios
-      .post("http://localhost:3000/api/v1/register", input)
+      .post(`http://localhost:3000/api/v1/register`, input)
       .then((res) => console.log(res, "api response"));
 
     setInput({

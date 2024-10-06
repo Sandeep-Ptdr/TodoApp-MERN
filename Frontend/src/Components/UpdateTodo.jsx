@@ -20,7 +20,7 @@ function UpdateTodo({ toggleUpdateCard, updateArray }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await axios.put(
-      `${backendUrl}/api/v2/updatetask/${updateArray._id}`, Input 
+      `${backendUrl}api/v2/updatetask/${updateArray._id}`, Input 
     ).then(() => toast.success("Todo Update Successfully!") )
   };
   useEffect(() => {

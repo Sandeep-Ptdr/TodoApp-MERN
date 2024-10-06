@@ -21,7 +21,7 @@ function LogIn() {
     e.preventDefault();
 
     await axios
-      .post(`${backendUrl}/api/v1/login`, input)
+      .post(`${backendUrl}api/v1/login`, input)
       .then((res) => {
         if (
           res.data.message === "Incorrect Email!" ||

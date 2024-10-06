@@ -16,7 +16,7 @@ function Register() {
     e.preventDefault();
 
     await axios
-      .post(`${backendUrl}/api/v1/register`, input)
+      .post(`${backendUrl}api/v1/register`, input)
       .then((res) => console.log(res, "api response"));
 
     setInput({

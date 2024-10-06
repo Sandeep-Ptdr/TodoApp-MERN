@@ -11,27 +11,34 @@ function Todos() {
   const [Input, setInput] = useState({ title: "", body: "" });
   const [Todos, setTodos] = useState([]);
   const [updateToggle, setUpdateToggle] = useState(true); //open and close the update card component
-
+  const [loading, setLoading] = useState(null);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (userId) {
-      await axios
-        .post("http://localhost:3000/api/v2/addtask", {
-          title: Input.title,
-          body: Input.body,
-          id: userId,
-        })
-        .then((res) => console.log(res));
+    try {
+      if (userId) {
+        setLoading(true);
+        await axios
+          .post("http://localhost:3000/api/v2/addtask", {
+            title: Input.title,
+            body: Input.body,
+            id: userId,
+          })
+          .then((res) => console.log(res));
 
-      setInput({ title: "", body: "" });
+        setInput({ title: "", body: "" });
 
-      toast.success("Task Added !");
-    } else {
-      setTodos([...Todos, Input]);
+        toast.success("Task Added !");
+      } else {
+        setTodos([...Todos, Input]);
 
-      setInput({ title: "", body: "" });
-      // console.log("todos",Todos)
-      toast.success("Task Added !");
+        setInput({ title: "", body: "" });
+        // console.log("todos",Todos)
+        toast.success("Task Added !");
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -72,20 +79,27 @@ function Todos() {
   };
 
   // Monitor changes in Todos and log them when they update
-  useEffect(() => {
+   userId && (useEffect(() => {
     const fetchTodos = async () => {
-      await axios
+      try {
+        setLoading(true)
+        await axios
         .get(`http://localhost:3000/api/v2/readtask/${userId}`)
         .then((res) => setTodos(res.data.alltodo));
+      } catch (error) {
+        console.log(error)
+      } finally{
+        setLoading(false)
+      }
     };
     fetchTodos();
-  }, [Todos, handleSubmit]);
+  }, [Todos, handleSubmit]));
 
   return (
     <>
       <ToastContainer />
 
-      <div className="flex justify-center border-[1px] border-gray-300 h-fit p-2 w-full rounded-lg sm:w-[30%] shadow-lg z-20 ">
+      <div className="flex justify-center border-[1px] border-gray-300 h-fit p-2 w-full rounded-lg sm:max-w-[30%]   shadow-lg z-20 ">
         <form
           className="flex flex-col gap-2 w-full h-full"
           onSubmit={handleSubmit}
@@ -116,7 +130,8 @@ function Todos() {
           </button>
         </form>
       </div>
-      <div className="w-full min-h-full flex flex-col items-center sm:grid sm:grid-cols-4 gap-3  mt-5">
+
+      {loading ?( <p className="mt-2">Loading...</p>) : (<div className="w-full min-h-full justify-center grid grid-cols-[repeat(auto-fit,250px)] gap-3 mt-5 mx-auto">
         {Todos && Todos.length > 0 ? (
           Todos.map((Todos, index) => (
             <TodoCard
@@ -135,7 +150,8 @@ function Todos() {
             No Todos..
           </h1>
         )}
-      </div>
+      </div>) }
+
       <div
         className={`${
           updateToggle ? "hidden" : "none"

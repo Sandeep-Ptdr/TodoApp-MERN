@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer,toast } from "react-toastify";
+import { backendUrl } from "../assets/config";
 
 function Register() {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ function Register() {
     e.preventDefault();
 
     await axios
-      .post(`http://localhost:3000/api/v1/register`, input)
+      .post(`${backendUrl}/api/v1/register`, input)
       .then((res) => console.log(res, "api response"));
 
     setInput({

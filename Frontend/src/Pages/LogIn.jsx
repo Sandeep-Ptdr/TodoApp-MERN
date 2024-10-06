@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 import { login } from "../redux/slices/AuthSlice";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
-
+import { backendUrl } from "../assets/config";
+ 
 function LogIn() {
   const navigate = useNavigate();
   // const isLoggedIn = useSelector((state) => state.auth.isLoggedin);
@@ -20,7 +21,7 @@ function LogIn() {
     e.preventDefault();
 
     await axios
-      .post(`http://localhost:3000/api/v1/login`, input)
+      .post(`${backendUrl}/api/v1/login`, input)
       .then((res) => {
         if (
           res.data.message === "Incorrect Email!" ||
@@ -29,10 +30,11 @@ function LogIn() {
           toast.error(`${res.data.message}`);
         } else {
           sessionStorage.setItem("id", res.data.others._id);
-
+           
           dispatch(login());
 
           toast.success("Login Success");
+         
           
           setTimeout(() => {
             navigate("/");

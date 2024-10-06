@@ -4,6 +4,9 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import UpdateTodo from "./UpdateTodo";
 import axios from "axios";
+import { backendUrl } from "../assets/config";
+
+
 let toUpdateArray = [];
 
 function Todos() {
@@ -19,7 +22,7 @@ function Todos() {
       if (userId) {
         
         await axios
-          .post(`http://localhost:3000/api/v2/addtask`, {
+          .post(`${backendUrl}/api/v2/addtask`, {
             title: Input.title,
             body: Input.body,
             id: userId,
@@ -50,7 +53,7 @@ function Todos() {
 
   const del = async (id) => {
     if (userId) {
-      await axios.delete(`http://localhost:3000/api/v2/deletetask/${id}`, {
+      await axios.delete(`${backendUrl}/api/v2/deletetask/${id}`, {
         data: { id: userId },
       });
 
@@ -85,7 +88,7 @@ function Todos() {
       try {
         
         await axios
-        .get(`http://localhost:3000/api/v2/readtask/${userId}`)
+        .get(`${backendUrl}/api/v2/readtask/${userId}`)
         .then((res) => setTodos(res.data.alltodo));
       } catch (error) {
         console.log('error in reading data.',error)

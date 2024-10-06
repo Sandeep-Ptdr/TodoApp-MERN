@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { backendUrl } from "../assets/config";
 function UpdateTodo({ toggleUpdateCard, updateArray }) {
   
   
@@ -19,7 +20,7 @@ function UpdateTodo({ toggleUpdateCard, updateArray }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await axios.put(
-      `http://localhost:3000/api/v2/updatetask/${updateArray._id}`, Input 
+      `${backendUrl}/api/v2/updatetask/${updateArray._id}`, Input 
     ).then(() => toast.success("Todo Update Successfully!") )
   };
   useEffect(() => {

@@ -4,6 +4,7 @@ import Footer from "./Components/Footer";
 import { Outlet } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "./redux/slices/AuthSlice";
+ 
 
 const App = () => {
   const dispatch = useDispatch();
@@ -12,9 +13,9 @@ const id = sessionStorage.getItem('id');
 if(id){
   dispatch(login());
 }
-
 }, [])
-
+ 
+ 
 
   return (
     <div>

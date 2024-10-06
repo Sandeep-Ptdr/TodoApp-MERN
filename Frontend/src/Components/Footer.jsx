@@ -9,7 +9,7 @@ function Footer() {
           <div className="mb-6 md:mb-0">
             <Link to="/" className="flex items-center">
               <h1 className="text-4xl font-extrabold text-indigo-500">
-                TodoApp
+                 ListiFy
               </h1>
             </Link>
           </div>

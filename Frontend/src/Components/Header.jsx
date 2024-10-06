@@ -14,8 +14,9 @@ const Header = () => {
       <nav className="bg-gray-200 shadow shadow-gray-300 w-100 h-1/5 px-8 md:px-auto">
         <div className="md:h-16 h-28 mx-auto md:px-4 container flex items-center justify-between flex-wrap md:flex-nowrap">
           <Link to="/">
-            <div className="text-indigo-500 md:order-1">
+            <div className="text-indigo-500 md:order-1 flex items-center">
               <RiTodoFill style={{ width: 30, height: 30 }} />
+               <h1 className="text-3xl font-bold">ListiFy</h1>
             </div>
           </Link>
           <div className="text-gray-500 order-3 w-full md:w-auto md:order-2">

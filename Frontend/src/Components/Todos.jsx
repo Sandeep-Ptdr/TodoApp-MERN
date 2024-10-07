@@ -34,10 +34,14 @@ function Todos() {
         toast.success("Task Added !");
       } else {
         setTodos([...Todos, Input]);
+ 
+        
 
         setInput({ title: "", body: "" });
-        // console.log("todos",Todos)
-        toast.success("Task Added !");
+
+       toast.success("Task added, but won't be saved. Sign in to save.")
+        
+        
       }
     } catch (error) {
       console.log(error);
@@ -52,6 +56,7 @@ function Todos() {
   };
 
   const del = async (id) => {
+   try {
     if (userId) {
       await axios.delete(`${backendUrl}api/v2/deletetask/${id}`, {
         data: { id: userId },
@@ -65,6 +70,9 @@ function Todos() {
       setTodos([...Todos]);
       toast("Task Deleted !");
     }
+   } catch (error) {
+    console.log("error in deleting the task",error)
+   }
   };
 
   const handleUpdate = (value) => {
@@ -103,6 +111,7 @@ function Todos() {
   return (
     <>
       <ToastContainer />
+      
 
       <div className="flex justify-center border-[1px] border-gray-300 h-fit p-2 w-full rounded-lg sm:max-w-[30%]   shadow-lg z-20 ">
         <form

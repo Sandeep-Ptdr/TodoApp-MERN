@@ -19,8 +19,8 @@ function LogIn() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
-    await axios
+    try {
+      await axios
       .post(`${backendUrl}api/v1/login`, input)
       .then((res) => {
         if (
@@ -33,19 +33,23 @@ function LogIn() {
            
           dispatch(login());
 
-          toast.success("Login Success");
+          // toast.success("Login Successful",{autoClose:1000});
          
-          
-          setTimeout(() => {
-            navigate("/");
-          }, 1000);
+          navigate("/");
+          // setTimeout(() => {
+          //   navigate("/");
+          // }, 2000);
         }
+        setInput({
+          email: "",
+          password: "",
+        });
       });
+    } catch (error) {
+      console.log("error in log in",error)
+    }
 
-    setInput({
-      email: "",
-      password: "",
-    });
+    
   };
 
   return (
